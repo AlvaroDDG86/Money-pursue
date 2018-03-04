@@ -9,6 +9,12 @@ import { HomePage } from '../pages/home/home';
 import { AgregaMovimientoPage } from '../pages/agrega-movimiento/agrega-movimiento';
 import { TabsPage } from '../pages/tabs/tabs';
 
+// Providers
+import { InfoProvider } from '../providers/info/info';
+import { HttpClientModule } from '@angular/common/http'; 
+import { HttpModule } from '@angular/http';
+
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -23,7 +29,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -37,7 +45,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    HttpClientModule,
+    HttpModule,
+    InfoProvider
   ]
 })
 export class AppModule {}
