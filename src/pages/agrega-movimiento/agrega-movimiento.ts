@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController  } from 'ionic-angular';
+import { Movimiento } from '../../models/Movimiento';
 
 /**
  * Generated class for the AgregaMovimientoPage page.
@@ -14,8 +15,11 @@ import { IonicPage, NavController, NavParams, ViewController  } from 'ionic-angu
   templateUrl: 'agrega-movimiento.html',
 })
 export class AgregaMovimientoPage {
+  movimiento: Movimiento;
 
-  constructor(public viewCtrl: ViewController) {
+  constructor(public viewCtrl: ViewController,
+            public navParams: NavParams) {
+    this.movimiento = this.navParams.get("movimiento");
   }
 
   cerrarModal(){

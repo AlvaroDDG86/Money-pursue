@@ -59,4 +59,8 @@ export class InfoProvider {
   getMovimientos(): Movimiento[]{
     return this.movimientos;
   }
+  eliminarMovimiento(movimiento: Movimiento):boolean{
+      var eliminado = this.movimientos.splice(this.movimientos.indexOf(movimiento),1);
+      return (eliminado != null);
+  }
 }

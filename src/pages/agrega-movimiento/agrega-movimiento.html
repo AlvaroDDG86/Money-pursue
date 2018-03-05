@@ -14,6 +14,18 @@
 
 
 <ion-content padding>
-  <h2>Agregar nuevo movimiento</h2>
-  <button ion-button block (click)="cerrarModal()">Cerrar</button>
+  <h2 *ngIf="!movimiento">gregar nuevo movimiento</h2>
+  <h2 *ngIf="movimiento" color="marca2"><ion-icon name="settings"></ion-icon> Editar movimiento</h2>
+  <ion-card *ngIf="movimiento">
+    <ion-card-header>
+        <ion-icon *ngIf="movimiento.negativo" name="arrow-down" item-start color="danger"></ion-icon>
+        <ion-icon *ngIf="!movimiento.negativo" name="arrow-up" item-start color="secondary"></ion-icon>
+      <h2>{{movimiento.cantidad | currency:'EUR'}}</h2>
+    </ion-card-header>
+    <ion-card-content>
+        <h3>{{movimiento.detalle}}</h3>
+        <p>{{movimiento.fecha | date:'MM-dd-yyyy'}}</p>
+    </ion-card-content>
+  </ion-card>
+  <button color="marca2" ion-button block (click)="cerrarModal()">Cerrar</button>
 </ion-content>

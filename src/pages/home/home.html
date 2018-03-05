@@ -4,15 +4,27 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-list>
-    <ion-item *ngFor="let movimiento of movimientos">
-      <ion-icon *ngIf="movimiento.negativo" name="arrow-down" item-start color="danger"></ion-icon>
-      <ion-icon *ngIf="!movimiento.negativo" name="arrow-up" item-start color="secondary"></ion-icon>
-      <h2>{{movimiento.cantidad}}</h2>
-      <h3>{{movimiento.detalle}}</h3>
-      <p>{{movimiento.fecha}}</p>
-    </ion-item>
+    <ion-list-header>
+      Lunes
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let movimiento of movimientos">
+        <ion-item>
+            <ion-icon *ngIf="movimiento.negativo" name="arrow-down" item-start color="danger"></ion-icon>
+            <ion-icon *ngIf="!movimiento.negativo" name="arrow-up" item-start color="secondary"></ion-icon>
+            <h2>{{movimiento.cantidad | currency:'EUR'}}</h2>
+            <h3>{{movimiento.detalle}}</h3>
+            <p>{{movimiento.fecha | date:'MM-dd-yyyy'}}</p>
+          </ion-item>
+        <ion-item-options side="left">
+          <button ion-button (click)="editar(movimiento)"><ion-icon name="settings"></ion-icon></button>
+        </ion-item-options>
+    
+        <ion-item-options side="right">
+            <button ion-button color="danger" (click)="eliminar(movimiento)"><ion-icon name="trash"></ion-icon></button>
+        </ion-item-options>
+      </ion-item-sliding>
   </ion-list>
   <ion-fab right bottom>
     <button ion-fab color="marca2" (click)="abrirAgregar()"><ion-icon name="add"></ion-icon></button>
