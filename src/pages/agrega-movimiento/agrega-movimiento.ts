@@ -16,10 +16,19 @@ import { Movimiento } from '../../models/Movimiento';
 })
 export class AgregaMovimientoPage {
   movimiento: Movimiento;
-
+  nuevo: boolean;
   constructor(public viewCtrl: ViewController,
             public navParams: NavParams) {
-    this.movimiento = this.navParams.get("movimiento");
+      this.movimiento = this.navParams.get("movimiento");
+      if (!this.movimiento){
+        this.nuevo = !0;
+        this.movimiento = {
+          cantidad: 0,
+          detalle: '',
+          fecha:new Date().toString(),
+          negativo: false
+        };
+      }
   }
 
   cerrarModal(){
@@ -27,4 +36,7 @@ export class AgregaMovimientoPage {
     this.viewCtrl.dismiss(data);
   }
 
+  guardar(){
+    console.log(this.movimiento);
+  }
 }

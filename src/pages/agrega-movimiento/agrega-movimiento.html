@@ -11,21 +11,46 @@
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
-  <h2 *ngIf="!movimiento">gregar nuevo movimiento</h2>
-  <h2 *ngIf="movimiento" color="marca2"><ion-icon name="settings"></ion-icon> Editar movimiento</h2>
-  <ion-card *ngIf="movimiento">
-    <ion-card-header>
-        <ion-icon *ngIf="movimiento.negativo" name="arrow-down" item-start color="danger"></ion-icon>
-        <ion-icon *ngIf="!movimiento.negativo" name="arrow-up" item-start color="secondary"></ion-icon>
-      <h2>{{movimiento.cantidad | currency:'EUR'}}</h2>
-    </ion-card-header>
-    <ion-card-content>
-        <h3>{{movimiento.detalle}}</h3>
-        <p>{{movimiento.fecha | date:'MM-dd-yyyy'}}</p>
-    </ion-card-content>
-  </ion-card>
-  <button color="marca2" ion-button block (click)="cerrarModal()">Cerrar</button>
+  <h2 *ngIf="nuevo">Nuevo movimiento</h2>
+  <h2 *ngIf="!nuevo"><ion-icon name="settings"></ion-icon> Editar movimiento</h2>
+    <form (ngSubmit)="guardar()">
+        <ion-list>
+            <ion-item>
+                <ion-icon *ngIf="movimiento.negativo" name="arrow-down" item-start color="danger"></ion-icon>
+                <ion-icon *ngIf="!movimiento.negativo" name="arrow-up" item-start color="secondary"></ion-icon>
+              <ion-label>Tipo movimiento</ion-label>
+              <ion-select [(ngModel)]="movimiento.negativo" name="negativo">
+                <ion-option [value]="false">Positivo</ion-option>
+                <ion-option [value]="true">Negativo</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>Password</ion-label>
+              <ion-input [(ngModel)]="movimiento.cantidad" name="cantidad"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Password</ion-label>
+                <ion-input [(ngModel)]="movimiento.detalle" name="detalle"></ion-input>
+            </ion-item>
+            
+        </ion-list>
+    </form>
 </ion-content>
+<ion-footer no-shadow>
+  <ion-toolbar position="bottom">
+    <div class="row"> 
+      <div class="col col-50">
+        <button color="marca2" ion-button type="submit" block icon-right>
+            Guardar<ion-icon name="create"></ion-icon>
+            </button>
+      </div>
+      <div class="col col-50">
+        <button color="marca2" ion-button (click)="cerrarModal()" block icon-right>
+            Cerrar<ion-icon name="exit" ></ion-icon>
+            </button>
+      </div>     
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
